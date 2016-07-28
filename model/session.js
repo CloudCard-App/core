@@ -7,7 +7,7 @@ var sessionSchema = mongoose.Schema({
   endTime: Number,
   duration: Number,
   deck: deckSchema,
-  student: sessionSchema
+  student: studentSchema
 });
 
 module.exports.schema = sessionSchema;
