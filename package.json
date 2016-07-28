@@ -1,0 +1,17 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "description": "The data access core of CloudCard",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CloudCard-App/core.git"
+  },
+  "author": "Marc Bacvanski",
+  "bugs": {
+    "url": "https://github.com/CloudCard-App/core/issues"
+  },
+  "homepage": "https://github.com/CloudCard-App/core#readme",
+  "dependencies": {
+    "mongoose": "^4.5.7"
+  }
+}
