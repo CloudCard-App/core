@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var studentSchema = require('./student').schema;
 var deckSchema = require('./deck').schema;
 
-var sessionSchema = mongoose.Schema({
+var sessionSchema = new mongoose.Schema({
   startTime: Number,
   endTime: Number,
   duration: Number,
@@ -11,4 +11,4 @@ var sessionSchema = mongoose.Schema({
 });
 
 module.exports.schema = sessionSchema;
-module.exports.model = mongoose.model(sessionSchema);
+module.exports.model = mongoose.model('Session', sessionSchema);

@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
-var classSchema = require('./class').schema;
 
-var teacherSchema = mongoose.Schema({
+var teacherSchema = new mongoose.Schema({
   google: {
     id: String,
     token: String,
@@ -9,8 +8,7 @@ var teacherSchema = mongoose.Schema({
     name: String,
     avatarUrl: String
   },
-  classes: [classSchema]
 }, {collection: 'teachers'});
 
 module.exports.schema = teacherSchema;
-module.exports.model = mongoose.model(teacherSchema);
+module.exports.model = mongoose.model('Teacher', teacherSchema);

@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
-var classSchema = require('class').schema;
-var sessionSchema = require('session').schema;
+var classSchema = require('./class').schema;
 
-var studentSchema = mongoose.Schema({
+var studentSchema = new mongoose.Schema({
   google: {
     id: String,
     token: String,
@@ -15,4 +14,4 @@ var studentSchema = mongoose.Schema({
 });
 
 module.exports.schema = studentSchema;
-module.exports.model = mongoose.model(studentSchema);
+module.exports.model = mongoose.model('Student', studentSchema);
