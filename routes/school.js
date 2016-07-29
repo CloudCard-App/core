@@ -28,12 +28,12 @@ module.exports.get_list = function(req, res) {
   });
 };
 
-module.exports.get_school = function(req, res) {
+module.exports.get_info = function(req, res) {
   let querySchoolName = req.query.name;
 
   let schoolModel = require('../model/school').model;
-  schoolModel.find({name: querySchoolName}).sort({name: -1}).then(function (schools) {
-    res.status(200).send(schools);
+  schoolModel.findOne({name: querySchoolName}).then(function (school) {
+    res.status(200).send(school);
   }).catch(function (err) {
     console.error('Query for school ' + querySchoolName + ' returned error ' + err);
     res.status(500).send();
@@ -41,10 +41,10 @@ module.exports.get_school = function(req, res) {
 };
 
 module.exports.delete_school = function(req, res) {
-  let schoolName = req.query.name;
+  let schoolName = req.body.name;
 
   let schoolModel = require('../model/school').model;
-  schoolModel.find({name: schoolName}).remove().then(function () {
+  schoolModel.findOne({name: schoolName}).remove().then(function () {
     res.status(200).send();
   }).catch(function (err) {
     console.error('Delete school with name ' + schoolName + ' returned error ' + err);
