@@ -13,7 +13,7 @@ module.exports.post_register = function (req, res) {
   newSchool.save().then(function () {
     res.status(200).send();
   }).catch(function (err) {
-    console.error('Error saving new school: ' + err);
+    console.error('Error saving new schoolRoutes: ' + err);
     res.status(500).send();
   });
 };
@@ -23,7 +23,7 @@ module.exports.get_list = function(req, res) {
   schoolModel.find({}).sort({name: 1}).then(function (schools) {
     res.status(200).send(schools);
   }).catch(function (err) {
-    console.error('Query for school ' + querySchoolName + ' returned error ' + err);
+    console.error('Query for schoolRoutes ' + querySchoolName + ' returned error ' + err);
     res.status(500).send();
   });
 };
@@ -35,7 +35,7 @@ module.exports.get_info = function(req, res) {
   schoolModel.findOne({name: querySchoolName}).then(function (school) {
     res.status(200).send(school);
   }).catch(function (err) {
-    console.error('Query for school ' + querySchoolName + ' returned error ' + err);
+    console.error('Query for schoolRoutes ' + querySchoolName + ' returned error ' + err);
     res.status(500).send();
   });
 };
@@ -47,7 +47,7 @@ module.exports.delete_school = function(req, res) {
   schoolModel.findOne({name: schoolName}).remove().then(function () {
     res.status(200).send();
   }).catch(function (err) {
-    console.error('Delete school with name ' + schoolName + ' returned error ' + err);
+    console.error('Delete schoolRoutes with name ' + schoolName + ' returned error ' + err);
     res.status(500).send();
   });
 };

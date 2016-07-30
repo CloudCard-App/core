@@ -3,7 +3,7 @@ var teacherSchema = require('./teacher').schema;
 
 var classSchema = new mongoose.Schema({
   name: String,
-  accessCode: String,
+  password: String,
   teacher: teacherSchema,
 });
 

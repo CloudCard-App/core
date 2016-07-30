@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var schoolSchema = require('./school').schema;
 
 var teacherSchema = new mongoose.Schema({
   google: {
@@ -8,6 +9,7 @@ var teacherSchema = new mongoose.Schema({
     name: String,
     avatarUrl: String
   },
+  school: schoolSchema
 }, {collection: 'teachers'});
 
 module.exports.schema = teacherSchema;
