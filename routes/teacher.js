@@ -23,8 +23,8 @@ module.exports.post_register = function (req, res) {
     } else {
       res.status(400).send({error: 'no such school'});
     }
-  }).then(function (results) {
-    res.status(200).send();
+  }).then(function (newSchool) {
+    res.status(200).send(newSchool);
   }).catch(function (err) {
     console.error('Error registering teacher: ' + err);
     res.status(500).send();

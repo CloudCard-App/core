@@ -10,8 +10,8 @@ module.exports.post_register = function (req, res) {
     teachers: teachers
   });
 
-  newSchool.save().then(function () {
-    res.status(200).send();
+  newSchool.save().then(function (newSchool) {
+    res.status(200).send(newSchool);
   }).catch(function (err) {
     console.error('Error saving new schoolRoutes: ' + err);
     res.status(500).send();
