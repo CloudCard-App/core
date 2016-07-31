@@ -62,7 +62,6 @@ module.exports.get_list = function (req, res) {
  */
 module.exports.get_info = function (req, res) {
   let teacherID = req.query.id;
-
   let teacherModel = require('../model/teacher').model;
 
   teacherModel.findOne({'_id': teacherID}).then(function (teacher) {
