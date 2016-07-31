@@ -62,6 +62,8 @@ module.exports = function (app) {
 
   app.post('/card/create', cardRoutes.post_create);
 
+  app.post('/card/update', cardRoutes.post_update);
+
   app.get('/card/info/*', cardRoutes.get_info);
 
   app.get('/card/list/*', cardRoutes.get_list);

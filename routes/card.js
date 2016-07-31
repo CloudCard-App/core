@@ -14,13 +14,34 @@ module.exports.post_create = function (req, res) {
 
       return newCard.save();
     } else {
-      res.status(400).send({error: 'deck not found'});
+      res.status(400).send({error: 'no such deck'});
     }
   }).then(function (newCard) {
     res.status(200).send(newCard);
   }).catch(function (err) {
     console.error('Error creating card: ' + err);
     res.status(500).send();
+  });
+};
+
+module.exports.post_update = function (req, res) {
+  let cardID = req.body.cardID;
+  let cardModel = require('../model/card').model;
+
+  let newData = {};
+  if (req.body.dataType) {
+    newData.dataType = req.body.dataType;
+  }
+  if (req.body.front) {
+    newData.front = req.body.front;
+  }
+  if (req.body.back) {
+    newData.back = req.body.back;
+  }
+
+  cardModel.findOneAndUpdate({'_id': cardID}, newData, {upsert: false}).then(function (update) {
+    console.log('update = ' + update);
+    res.status(200).send();
   });
 };
 
@@ -56,7 +77,7 @@ module.exports.delete_card = function (req, res) {
     if (JSON.parse(deleted).n == 1) {
       res.status(200).send();
     } else {
-      res.status(400).send({error: 'card not found'});
+      res.status(400).send({error: 'no such card'});
     }
   }).catch(function (err) {
     console.error('Error finding card: ' + err);
