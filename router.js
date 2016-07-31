@@ -3,6 +3,7 @@ var teacherRoutes = require('./routes/teacher');
 var classRoutes = require('./routes/class');
 var studentRoutes = require('./routes/student');
 var deckRoutes = require('./routes/deck');
+var cardRoutes = require('./routes/card');
 
 module.exports = function (app) {
   app.post('/school/register', schoolRoutes.post_register);
@@ -55,7 +56,15 @@ module.exports = function (app) {
 
   app.get('/deck/list/*', deckRoutes.get_decks);
 
+  app.delete('/deck/delete', deckRoutes.delete_deck);
+
   // --------------------------------------------------------------------------
 
+  app.post('/card/create', cardRoutes.post_create);
 
+  app.get('/card/info/*', cardRoutes.get_info);
+
+  app.get('/card/list/*', cardRoutes.get_list);
+
+  app.delete('/card/delete/', cardRoutes.delete_card);
 };
