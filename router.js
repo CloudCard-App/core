@@ -70,6 +70,10 @@ module.exports = function (app) {
     studentRoutes.get_info(req, res);
   });
 
+  app.get('/student/students/*', function (req, res) {
+    studentRoutes.get_students(req, res);
+  });
+
   app.post('/student/enroll', function (req, res) {
     studentRoutes.post_enroll(req, res);
   });

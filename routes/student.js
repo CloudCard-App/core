@@ -42,6 +42,18 @@ module.exports.get_info = function (req, res) {
   });
 };
 
+module.exports.get_students = function(req, res) {
+  let schoolID = req.query.schoolID;
+  let studentModel = require('../model/student').model;
+
+  studentModel.find({'school._id': schoolID}).sort({'name': 1}).then(function(students) {
+    res.status(200).send(students);
+  }).catch(function(err) {
+    console.error('Error getting students for class' + err);
+    res.status(500).send();
+  })
+};
+
 module.exports.post_enroll = function (req, res) {
   let studentID = req.body.studentID;
   let classID = req.body.classID;
