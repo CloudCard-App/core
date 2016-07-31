@@ -68,9 +68,9 @@ module.exports.post_enroll = function (req, res) {
     let classHere = results[1];
 
     if (!studentHere) {
-      res.status(400).send({error: 'student not found'});
+      res.status(400).send({error: 'no such student'});
     } else if (!classHere) {
-      res.status(400).send({error: 'class not found'});
+      res.status(400).send({error: 'no such class'});
     } else {
       studentHere.classes.push(classHere);
       return studentHere.save();
@@ -96,13 +96,13 @@ module.exports.post_unenroll = function (req, res) {
       });
 
       if (newClasses === student.classes) { // Class ID not found
-        res.status(400).send({error: 'class not found'});
+        res.status(400).send({error: 'no such class'});
       } else {
         student.classes = newClasses;
         return student.save();
       }
     } else {
-      res.status(400).send({error: 'student not found'});
+      res.status(400).send({error: 'no such student'});
     }
   }).then(function (student) {
     res.status(200).send(student);
@@ -120,7 +120,7 @@ module.exports.delete_student = function (req, res) {
     if (JSON.parse(deleted).n == 1) {
       res.status(200).send();
     } else {
-      res.status(400).send({error: 'student not found'});
+      res.status(400).send({error: 'no such student'});
     }
   }).catch(function (err) {
     console.error('Error deleting student: ' + err);

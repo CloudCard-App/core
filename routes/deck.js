@@ -54,7 +54,7 @@ module.exports.delete_deck = function (req, res) {
     if (JSON.parse(deleted).n == 1) {
       res.status(200).send();
     } else {
-      res.status(400).send({error: 'deck not found'});
+      res.status(400).send({error: 'no such deck'});
     }
   });
 };
