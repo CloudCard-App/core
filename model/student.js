@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var classSchema = require('./class').schema;
+var schoolSchema = require('./school').schema;
 
 var studentSchema = new mongoose.Schema({
   google: {
@@ -10,7 +11,7 @@ var studentSchema = new mongoose.Schema({
     avatarUrl: String
   },
   classes: [classSchema],
-  sessions: [sessionSchema]
+  school: schoolSchema
 });
 
 module.exports.schema = studentSchema;

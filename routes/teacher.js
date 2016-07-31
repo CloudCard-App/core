@@ -3,7 +3,6 @@ module.exports.post_register = function (req, res) {
 
   let email = req.body.gemail;
   let schoolEmailDomain = email.substring(email.indexOf('@') + 1, email.length);
-  console.log('school email domain = ' + schoolEmailDomain);
 
   let newTeacher = new teacherModel({
     google: {
@@ -69,7 +68,7 @@ module.exports.get_info = function (req, res) {
   teacherModel.findOne({'_id': teacherID}).then(function (teacher) {
     res.status(200).send(teacher);
   }).catch(function (err) {
-    console.error('Error finding teacherRoutes: ' + err);
+    console.error('Error finding teacher: ' + err);
     res.status(500).send();
   });
 };
@@ -78,7 +77,6 @@ module.exports.delete_teacher = function (req, res) {
   let id = req.body.id;
   let teacherModel = require('../model/teacher').model;
   teacherModel.findOne({_id: id}).remove().then(function (deleted) {
-    console.log('deleted: ' + deleted);
     if (JSON.parse(deleted).n == 1) { // 1 document was deleted
       res.status(200).send();
     } else { // 0 or other documents were deleted
