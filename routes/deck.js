@@ -45,3 +45,22 @@ module.exports.get_decks = function(req, res) {
     res.status(500).send();
   })
 };
+
+module.exports.delete_deck = function(req, res) {
+  let deckID = req.body.deckID;
+  let deckModel = require('../model/deck').model;
+  let cardModel = require('../model/card').model;
+
+  let deckDeletion = deckModel.findOne({'_id': deckID}).remove();
+  let cardsDeletion = cardModel.find({'deck._id': deckID}).remove();
+
+  Promise.all([deckDeletion, cardsDeletion]).then(function (results) {
+    let deckDeleted = results[0];
+
+    if (JSON.parse(deckDeleted).n == 1) {
+      res.status(200).send();
+    } else {
+      res.status(400).send({error: 'deck not found'});
+    }
+  });
+};
