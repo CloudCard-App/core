@@ -17,6 +17,7 @@ module.exports = function (app) {
 
   app.post('/teacher/register/', teacherRoutes.post_register);
   app.get('/teacher/list/', teacherRoutes.get_list);
+  app.get('/teacher/doesExist/*', teacherRoutes.get_exists);
   app.get('/teacher/info/*', teacherRoutes.get_info);
   app.delete('/teacher/delete/', teacherRoutes.delete_teacher);
 
