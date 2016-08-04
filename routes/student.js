@@ -7,22 +7,27 @@ module.exports.post_create = function (req, res) {
 
   schoolModel.findOne({'email': schoolEmailDomain}).then(function (school) {
     if (school) {
-      let newStudent = new studentModel({
+      let newStudent = {
         google: {
           id: req.body.gid,
-          token: req.body.gtoken,
           email: req.body.gemail,
           name: req.body.gname,
           avatarUrl: req.body.gavatar
         },
         classes: [],
         school: school
-      });
-      return newStudent.save();
+      };
+
+      let criteria = {
+        'google.id': req.body.gid,
+        'school._id': school.id
+      };
+      return studentModel.findOneAndUpdate(criteria, newStudent, {'upsert': true, 'new': true}).exec();
     } else {
       res.status(400).send({error: 'no such school'});
     }
   }).then(function (newStudent) {
+    console.log('new student ' + newStudent);
     res.status(200).send(newStudent);
   }).catch(function (err) {
     console.error('Error registering student: ' + err);
@@ -42,13 +47,13 @@ module.exports.get_info = function (req, res) {
   });
 };
 
-module.exports.get_students = function(req, res) {
+module.exports.get_students = function (req, res) {
   let schoolID = req.query.schoolID;
   let studentModel = require('../model/student').model;
 
-  studentModel.find({'school._id': schoolID}).sort({'name': 1}).then(function(students) {
+  studentModel.find({'school._id': schoolID}).sort({'name': 1}).then(function (students) {
     res.status(200).send(students);
-  }).catch(function(err) {
+  }).catch(function (err) {
     console.error('Error getting students for class' + err);
     res.status(500).send();
   })

@@ -5,7 +5,7 @@ var schoolSchema = require('./school').schema;
 var studentSchema = new mongoose.Schema({
   google: {
     id: String,
-    token: String,
+    // Token is removed since it changes with every login
     name: String,
     email: String,
     avatarUrl: String
