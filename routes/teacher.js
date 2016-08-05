@@ -23,7 +23,7 @@ module.exports.post_register = function (req, res) {
       };
       console.log('criteria = ' + JSON.stringify(criteria));
       // new true returns the updated document, not the original one
-      teacherModel.findOneAndUpdate(criteria, newTeacher, {'upsert': true, 'new': true}).exec();
+      return teacherModel.findOneAndUpdate(criteria, newTeacher, {'upsert': true, 'new': true}).exec();
     } else {
       res.status(400).send({error: 'no such school'});
     }
