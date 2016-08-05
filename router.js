@@ -23,7 +23,7 @@ module.exports = function (app) {
 
   // --------------------------------------------------------------------------
 
-  app.post('/class/post_create/', classRoutes.post_create);
+  app.post('/class/create/', classRoutes.post_create);
   app.get('/class/list/*', classRoutes.get_list);
   app.get('/class/info/*', classRoutes.get_info);
   app.delete('/class/delete/', classRoutes.delete_class);
@@ -34,7 +34,7 @@ module.exports = function (app) {
   app.post('/student/enroll/', studentRoutes.post_enroll);
   app.post('/student/unenroll/', studentRoutes.post_unenroll);
   app.get('/student/info/*', studentRoutes.get_info);
-  app.get('/student/list/*', studentRoutes.get_students);
+  app.get('/student/list/*', studentRoutes.get_students_school);
   app.delete('/student/delete/', studentRoutes.delete_student);
 
   // --------------------------------------------------------------------------
