@@ -47,15 +47,27 @@ module.exports.get_info = function (req, res) {
   });
 };
 
-module.exports.get_students = function (req, res) {
+module.exports.get_students_school = function (req, res) {
   let schoolID = req.query.schoolID;
   let studentModel = require('../model/student').model;
 
   studentModel.find({'school._id': schoolID}).sort({'name': 1}).then(function (students) {
     res.status(200).send(students);
   }).catch(function (err) {
-    console.error('Error getting students for class' + err);
+    console.error('Error getting students for class ' + err);
     res.status(500).send();
+  })
+};
+
+module.exports.get_students_class = function (req, res) {
+  let classID = req.query.classID;
+  let studentModel = require('../model/student').model;
+
+  studentModel.find({'classes._id': classID}).sort({'name': 1}).then(function(students) {
+    res.status(200).send(students);
+  }).catch(function(err) {
+    console.error('Error getting students for class ' + err);
+    res.status(400).send();
   })
 };
 
