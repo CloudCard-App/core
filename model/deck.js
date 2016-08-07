@@ -3,6 +3,7 @@ var classSchema = require('./class').schema;
 
 var deckSchema = new mongoose.Schema({
   name: String,
+  description: String,
   class: classSchema,
 });
 

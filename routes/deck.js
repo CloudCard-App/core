@@ -1,6 +1,7 @@
 module.exports.post_create = function (req, res) {
   let name = req.body.name;
   let classID = req.body.classID;
+  let description = req.body.description;
   let deckModel = require('../model/deck').model;
   let classModel = require('../model/class').model;
 
@@ -8,7 +9,8 @@ module.exports.post_create = function (req, res) {
     if (classHere) {
       let newDeck = new deckModel({
         name: name,
-        class: classHere
+        class: classHere,
+        description: description
       });
       return newDeck.save();
     } else {
