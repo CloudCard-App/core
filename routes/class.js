@@ -36,7 +36,7 @@ module.exports.get_list = function (req, res) {
 };
 
 module.exports.get_info = function (req, res) {
-  let id = req.query.id;
+  let id = req.query.classID;
 
   let classModel = require('../model/class').model;
 
