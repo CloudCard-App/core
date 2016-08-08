@@ -52,7 +52,7 @@ module.exports.delete_deck = function (req, res) {
   let deckID = req.body.deckID;
   let deckModel = require('../model/deck').model;
 
-  let deckDeletion = deckModel.findOne({'_id': deckID}).remove().then(function (deleted) {
+  deckModel.findOne({'_id': deckID}).remove().then(function (deleted) {
     if (JSON.parse(deleted).n == 1) {
       res.status(200).send();
     } else {
