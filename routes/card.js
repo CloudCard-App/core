@@ -30,7 +30,7 @@ module.exports.post_update = function (req, res) {
 
   let newData = {};
   if (req.body.dataType) {
-    newData.dataType = req.body.dataType;
+    newData.dataType = req.body.datatype;
   }
   if (req.body.front) {
     newData.front = req.body.front;
