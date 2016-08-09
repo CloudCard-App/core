@@ -4,10 +4,25 @@ module.exports.post_create = function (req, res) {
 
   let email = req.body.gemail;
   let schoolEmailDomain = email.substring(email.indexOf('@') + 1, email.length);
+  let schoolWithEmail = null;
 
   schoolModel.findOne({'email': schoolEmailDomain}).then(function (school) {
     if (school) {
-      let newStudent = {
+      schoolWithEmail = school;
+      let criteria = {
+        'google.id': req.body.gid,
+        'school._id': school.id
+      };
+      return studentModel.findOne(criteria);
+    } else {
+      res.status(400).send({error: 'no such school'});
+    }
+  }).then((student) => {
+    if (student) {
+      console.log('existing student ' + student);
+      res.status(200).send(student);
+    } else {
+      let newStudent = new studentModel({
         google: {
           id: req.body.gid,
           email: req.body.gemail,
@@ -15,16 +30,9 @@ module.exports.post_create = function (req, res) {
           avatarUrl: req.body.gavatar
         },
         classes: [],
-        school: school
-      };
-
-      let criteria = {
-        'google.id': req.body.gid,
-        'school._id': school.id
-      };
-      return studentModel.findOneAndUpdate(criteria, newStudent, {'upsert': true, 'new': true}).exec();
-    } else {
-      res.status(400).send({error: 'no such school'});
+        school: schoolWithEmail
+      });
+      return newStudent.save();
     }
   }).then(function (newStudent) {
     console.log('new student ' + newStudent);
@@ -63,9 +71,9 @@ module.exports.get_students_class = function (req, res) {
   let classID = req.query.classID;
   let studentModel = require('../model/student').model;
 
-  studentModel.find({'classes._id': classID}).sort({'name': 1}).then(function(students) {
+  studentModel.find({'classes._id': classID}).sort({'name': 1}).then(function (students) {
     res.status(200).send(students);
-  }).catch(function(err) {
+  }).catch(function (err) {
     console.error('Error getting students for class ' + err);
     res.status(400).send();
   })
