@@ -59,4 +59,16 @@ module.exports = function (app) {
   app.get('/session/list/student/*', sessionRoutes.get_list_student);
   app.get('/session/list/deck/*', sessionRoutes.get_list_deck);
   app.delete('/session/delete', sessionRoutes.delete_session);
+
+  // --------------------------------------------------------------------------
+
+  app.use(function(err, req, res, next) {
+    console.error('error: ' + err);
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+
 };
