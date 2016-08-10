@@ -16,5 +16,8 @@
     "cookie-parser": "^1.4.3",
     "mongoose": "^4.5.7",
     "morgan": "^1.7.0"
+  },
+  "scripts": {
+    "start": "node controller.js"
   }
 }
