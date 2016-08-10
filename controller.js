@@ -13,8 +13,7 @@ app.use(cookieParser());
 
 require('./router.js')(app);
 
-const DB_IP = "mongodb://localhost:27017/CloudCard";
-mongoose.connect(DB_IP);
+mongoose.connect(process.env.MONGODB_URL);
 let db = mongoose.connection;
 
 db.on('error', function() {
