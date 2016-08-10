@@ -13,6 +13,7 @@ app.use(cookieParser());
 
 require('./router.js')(app);
 
+console.log('connecting to db at ' + process.env.MONGODB_URL);
 mongoose.connect(process.env.MONGODB_URL);
 let db = mongoose.connection;
 
@@ -21,6 +22,6 @@ db.on('error', function() {
 });
 db.on('open', function () {
   console.log('Connection to DB successful.');
-  app.listen(8080);
-  console.log('Server listening on port 8080');
+  app.listen(process.env.PORT);
+  console.log('Server listening on port ' + process.env.PORT);
 });
