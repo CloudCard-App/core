@@ -19,5 +19,8 @@
   },
   "scripts": {
     "start": "node controller.js"
+  },
+  "engines": {
+    "node": "6.3.1"
   }
 }
